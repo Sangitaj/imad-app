@@ -22,11 +22,12 @@ var articleOne = {
             </p>`
 };
 
-function creatTemplate (data){
+function creatTemplate (data) {
    var title = data.title;
    var date = data.date;
    var heading = data.heading;
    var content = data.content;
+   
    var htmlTemplate = `
    <html>
     <head>
@@ -53,9 +54,9 @@ function creatTemplate (data){
         </div>
         </div>
     </body>
-</html>
-`;
-return htmlTemplate;
+    </html>
+    `;
+     return htmlTemplate;
 }
 app.get('/', function (req, res) {
   res.sendFile(path.join(__dirname, 'ui', 'index.html'));
