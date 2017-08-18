@@ -26,9 +26,7 @@ button.onclick = function(){
 
 var submit = document.getElementById('submit_btn');
 submit.onclick = function() {
-   //Make a request  to the server and send the name.
-    //Capture the list of names and render it as a list.
-   }
+    
     //Create a request object.
    var request = new XMLHttpRequest();
    //Capture the response and store it in a variable.
@@ -45,6 +43,7 @@ submit.onclick = function() {
          }
           var ul = document.getElementById('namelist');
               ul.innerHTML = list;
+         }
        }
        //Not done yet
    };
