@@ -122,7 +122,7 @@ var counter = 0;
 app.get('/counter', function(req, res){
    counter = counter + 1;
    res.send(counter.toString());
-});
+}); 
 
 var names = [];
 app.get('/submit-name', function (req, res) {  //URL: /submit-name?namexxxx
@@ -133,9 +133,19 @@ app.get('/submit-name', function (req, res) {  //URL: /submit-name?namexxxx
     res.send(JSON.stringify(names));
 });
 
-app.get('/:articleName',function (req, res){
-   var articleName = req.params.articleName;
-  res.send(createTemplate(articles[articleName]));
+app.get('/articles/:articleName',function (req, res){
+   pool.query("SELECT * FROM article WHERE title =" + req.params.articleName, function(err, result) {
+       if(err){
+           res.status(500).send(err.toString());
+       } else {
+           if(result.rows.length === 0){
+               res.send(404).send('Article Not Found');
+           } else {
+               var articleData = result.rows(0);
+               res.send(createTemplate(articleData));
+           }
+       }
+   });
 });
 
 app.get('/ui/style.css', function (req, res) {
