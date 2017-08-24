@@ -13,6 +13,55 @@ var config = {
 var app = express();
 app.use(morgan('combined'));
 
+var articles = {
+    'article-one': {
+    title: 'Article One | Sangita Jhunjhunwala',
+    heading: 'Article One',
+    date:'August 16,2017',
+    content:`
+           <p>
+               This is the content of my first article.This is the content of my first article.This is the content of my first article.This is the content of my first article.This is the content of my first article. 
+            </p>
+            <p>
+               This is the content of my first article.This is the content of my first article.This is the content of my first article.This is the content of my first article.This is the content of my first article. 
+            </p>
+            <p>
+               This is the content of my first article.This is the content of my first article.This is the content of my first article.This is the content of my first article.This is the content of my first article. 
+            </p>`
+        
+        },
+    'article-two': {
+    title: 'Article Two | Sangita Jhunjhunwala',
+    heading: 'Article Two',
+    date:'August 16,2017',
+    content:`
+           <p>
+               This is the content of my second article. 
+            </p>
+            <p>
+               This is the content of my second article.
+            </p>
+            <p>
+               This is the content of my second article. 
+            </p>`
+        
+        },
+    'article-three': {
+    title: 'Article Three | Sangita Jhunjhunwala',
+    heading: 'Article Three',
+    date:'August 16,2017',
+    content:`
+           <p>
+               This is the content of my third article. 
+            </p>
+            <p>
+               This is the content of my third article. 
+            </p>
+            <p>
+               This is the content of my third article.
+            </p>`
+        }
+    };
 function createTemplate (data) {
     
    var title = data.title;
@@ -84,8 +133,8 @@ app.get('/submit-name', function (req, res) {  //URL: /submit-name?namexxxx
 });
 
 app.get('/articles/:articleName',function (req, res){
-    // SELECT * FROM article WHERE title = '';DELETE WHERE 'a'= 'asdf'
-   pool.query("SELECT * FROM article WHERE title = '" + req.params.articleName + "'", function(err, result) {
+    // SELECT * FROM article WHERE title = '\';DELETE WHERE 'a'= \'asdf'
+   pool.query("SELECT * FROM article WHERE title = $1",[req.params.articleName], function(err, result) {
        if(err){
            res.status(500).send(err.toString());
        } else {
