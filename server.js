@@ -145,6 +145,11 @@ app.get('/test-db', function(req, res){
     });
 });
 
+app.get('/logout', function(req, res){
+   delete req.session.auth;
+   res.send('Logged out');
+});
+
 var counter = 0;
 app.get('/counter', function(req, res){
    counter = counter + 1;
